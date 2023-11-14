@@ -29,7 +29,10 @@ LazyDatabase _openConnection() {
   );
 }
 
-@DriftDatabase(tables: [User, Purchase])
+@DriftDatabase(
+  tables: [User, Purchase],
+  queries: {'getUsernames': 'SELECT username FROM user'},
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -42,9 +45,8 @@ class AppDatabase extends _$AppDatabase {
   }
 
   // Get ALL usernames from db
-  Future<List> getUsersnamesList() async {
-    user.select(distinct: user.username);
-    return await user.$columns.;
+  Future<List<String>> getUsersnamesList() async {
+    return await getUsernames().get();
   }
 
   // Insert new user in db

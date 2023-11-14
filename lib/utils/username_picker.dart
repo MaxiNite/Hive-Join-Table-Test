@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_join_table_test/database/database.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class UsernamePicker extends StatefulWidget {
@@ -21,6 +22,9 @@ class _UsernamePickerState extends State<UsernamePicker> {
 
   @override
   Widget build(BuildContext context) {
+    database = Provider.of<AppDatabase>(context);
+    // Future<List<UserData>> userList = database.getUsersList().then((value) => );
+
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),

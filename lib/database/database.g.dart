@@ -424,6 +424,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $UserTable user = $UserTable(this);
   late final $PurchaseTable purchase = $PurchaseTable(this);
+  Selectable<String> getUsernames() {
+    return customSelect('SELECT username FROM user', variables: [], readsFrom: {
+      user,
+    }).map((QueryRow row) => row.read<String>('username'));
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
